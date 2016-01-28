@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
+
   root "products#index"
+  
   resources :products
+  resources :users, only: [:new, :create]
 
   # The 7 ReSTful Routes
   # get "/products", to "product#index"
