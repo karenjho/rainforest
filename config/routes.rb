@@ -1,4 +1,18 @@
 Rails.application.routes.draw do
+  root "products#index"
+  resources :products
+
+  # The 7 ReSTful Routes
+  # get "/products", to "product#index"
+  # get "/products/new", to "product#new"
+  # post "/products", to "product#create"
+  # get "/products/:id", to "product#show"
+  # get "/products/:id/edit", to "product#edit"
+  # put "/products/:id", to "product#update"
+  # delete "/products/:id/show", to "product#destroy"
+
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
