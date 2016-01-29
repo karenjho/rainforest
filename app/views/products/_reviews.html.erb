@@ -7,7 +7,6 @@
     <% if review.user != nil %>
       <em> by <%= review.user.email %></em>
       Added on: <%= review.created_at %>
-      <%= link_to "Edit review", edit_product_review_path(review.product_id) %>
     <% end %>
   </p>
 <% end %>
