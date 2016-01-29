@@ -5,9 +5,13 @@ Rails.application.routes.draw do
   get 'login' => 'sessions#new'
   get 'logout' => 'sessions#destroy'
 
-  resources :products
   resources :users, only: [:new, :create]
+  
   resources :sessions, only: [:new, :create, :destroy]
+
+  resources :products do
+    resources :reviews, only: [:show, :create, :destroy]
+  end
 
   # The 7 ReSTful Routes
   # get "/products", to "product#index"
