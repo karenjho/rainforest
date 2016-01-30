@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
 
   resources :products do
-    resources :reviews, only: [:show, :create, :destroy]
+    resources :reviews, only: [:show, :create, :destroy, :edit, :update ]
   end
 
   # The 7 ReSTful Routes
