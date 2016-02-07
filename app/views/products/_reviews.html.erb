@@ -1,17 +1,19 @@
 <p>Reviews for <%= @product.name %></p>
 
 <% @product.reviews.each do |review| %>
-  <p>
-    <%= review.comment %>
-    <br>
-    <% if review.user != nil %>
-      <em> by <%= review.user.email %></em>
-      Added on: <%= review.created_at %><br>
-      <% if current_user == review.user %>
-        <%= link_to "Edit this review", edit_product_review_path(review.product_id, review.id) %>
-      <% else %>
-        <%= link_to "Log in", login_path %> to edit this review
+  <ul>
+    <li>
+      <%= review.comment %>
+      <br>
+      <% if review.user != nil %>
+        <em> By <%= review.user.email %></em>
+        Added on: <%= review.created_at %><br>
+        <% if current_user == review.user %>
+          <%= link_to "Edit review", edit_product_review_path(@product, review) %>
+        <% else %>
+          <%= link_to "Log in", login_path %> to edit
+        <% end %>
       <% end %>
-    <% end %>
-  </p>
+    </li>
+  </ul>
 <% end %>
