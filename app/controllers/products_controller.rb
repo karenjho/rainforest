@@ -3,14 +3,15 @@ class ProductsController < ApplicationController
 
   def index
 
-    if params[:search]
-      @products = Product.where("name LIKE ?", "%#{params[:search]}%")
+    @products = if params[:search]
+      Product.where("name LIKE ?", "%#{params[:search]}%")
     else
-      @products = Product.all
+      Product.all
     end
 
-    if request.xhr?
-      render @products
+    respond_to do |format|
+      format.html
+      format.js
     end
 
   end
