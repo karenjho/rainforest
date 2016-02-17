@@ -9,6 +9,10 @@ class ProductsController < ApplicationController
       @products = Product.all
     end
 
+    if request.xhr?
+      render @products
+    end
+
   end
 
   def new
