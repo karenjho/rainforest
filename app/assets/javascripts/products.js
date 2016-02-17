@@ -5,13 +5,10 @@ $(document).on('ready page:load', function() {
 
     var searchValue = $('#search').val();
 
-    $.ajax({
-      type: 'GET',
-      url: '/products?search=' + searchValue,
-      dataType: 'HTML',
-    }).success(function (data) {
-      $('#products').html(data);
-    });
+    $.get('/products?search=' + searchValue)
+      .success(function (data) {
+        $('#products').html(data);
+      });
 
   });
 
