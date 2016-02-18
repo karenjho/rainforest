@@ -1,6 +1,7 @@
 class ReviewsController < ApplicationController
 
-  before_action :load_product_review, only: [:show, :edit, :update, :destroy]
+  before_action :load_product
+  before_action :load_review, only: [:show, :edit, :update, :destroy]
   before_action :ensure_logged_in, only: [:create, :destroy]
 
   def show
@@ -11,10 +12,21 @@ class ReviewsController < ApplicationController
     @review.user = current_user
 
     if @review.save
-      redirect_to products_path, notice: "Review successfully added for #{@product.name}!"
+
+      @reviews = @product.reviews
+
+      respond_to do |format|
+        format.html do
+          redirect_to product_path(@product), notice: "Review added."
+        end
+
+        format.js
+      end
+
     else
-      render "products/show"
+      render product_path(@product)
     end
+
   end
 
   def edit
@@ -38,8 +50,10 @@ class ReviewsController < ApplicationController
     params.require(:review).permit(:comment) # <= product_id is not required because the form doesn't include product_id
   end
 
-  def load_product_review
-    @product = Product.find(params[:product_id])
+  def load_review
     @review = Review.find(params[:id])
+  end
+  def load_product
+    @product = Product.find(params[:product_id])
   end
 end

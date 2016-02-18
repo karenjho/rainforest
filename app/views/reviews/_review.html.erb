@@ -1,0 +1,14 @@
+  <p class="review-comment"><%= review.comment %></p>
+
+  <% if review.user != nil %>
+  <p class="review-user">
+    <em> By <%= review.user.email %></em>
+    Added on: <%= review.created_at %><br>
+
+    <% if current_user == review.user %>
+      <%= link_to "Edit review", edit_product_review_path(@product, review) %>
+    <% else %>
+      <%= link_to "Log in", login_path %> to edit
+    <% end %>
+  </p>
+  <% end %>

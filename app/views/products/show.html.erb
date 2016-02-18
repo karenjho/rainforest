@@ -5,6 +5,30 @@
 <p>Price: $<%= @product.formatted_price %></p>
 <p><%= @product.description %></p>
 
-<%= render "reviews" %>
+<h3>Reviews for <%= @product.name %></h3>
 
-<%= render "reviewform" %>
+<div id="reviews-list">
+  <%= render @reviews %>
+</div>
+
+
+<% if current_user %>
+  <h4>Add a review for <%= @product.name %></h4>
+
+  <%= form_for [@product, @review], remote: true do |f| %>
+
+    <% render "errors" %>
+
+    <div class="field">
+      <%= f.label :comment %><br>
+      <%= f.text_area :comment %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Add review" %>
+    </div>
+  <% end %>
+
+<% else %>
+  <p>Please <%= link_to "log in", login_path %> to add a review.</p>
+<% end %>
