@@ -1,5 +1,9 @@
 <h1>Products</h1>
+
 <p><%= link_to "New Product", new_product_path %></p>
+
+<!-- Kaminari page_entries_info helper will add message about entries displayed vs total entries -->
+<h2><small><%= page_entries_info @products %></small></h2>
 
 <%= form_tag products_path, method: :get, authentication: false, id: 'search-form' do %>
   <%= text_field_tag :search, params[:search] %>
@@ -9,3 +13,6 @@
 <div id="products">
   <%= render @products %>
 </div>
+
+<!-- Kaminari paginate helper adds page numbers and pagination links -->
+<%= paginate @products %>
